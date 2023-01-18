@@ -138,7 +138,10 @@ def detect(save_img=False):
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
                 start = time.time()
                 xyxy_list = []
+                print("check1")
                 im1 = im0.copy()
+                print("check2")
+                print(im1)
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
@@ -228,13 +231,22 @@ def detect(save_img=False):
                     if ceita_m > 10:
                         flag = False
                     if flag == True:
+                        print("check3")
+                        print(im1)
                         cv2.line(im1, (int((y - b) / k), y), (int((360 - b) / k), 360), (0, 0, 255), 3)
+                        print("check4")
+                        print(im1)
                         cv2.line(im1, (int((y - b1) / k1), y), (int((360 - b1) / k1), 360), (0, 0, 255), 3)
+                        print("check5")
+                        print(im1)
                         cv2.line(im1, (int(((y - b) / k + (y - b1) / k1) / 2), y),
                                            (int(((360 - b) / k + (360 - b1) / k1) / 2), 360),
                                            (0, 255, 255), 3)
-
+                        print("check6")
+                        print(im1)
                         cv2.polylines(im1, [c], True, (255, 0, 0), 3)
+                        print("check7")
+                        print(im1)
                 except:
                     pass
                 return im0
@@ -264,7 +276,11 @@ def detect(save_img=False):
                     w0 = im0.shape[1]
 
                     im0 = cv2.resize(im0, (640, 360))
+                    print("check8")
+                    print(im1)
                     im1 = cv2.resize(im1, (640, 360))
+                    print("check9")
+                    print(im1)
                     xyxy_list_sort = to_sublists(xyxy_list)
                     
                     # print(im0,im1)
@@ -293,14 +309,21 @@ def detect(save_img=False):
 
                     fast(roi, int((new_lst[0][0] + xyxy_list_sort[0][0]) / (w0 / 320)), int(new_lst[0][1] / (h0 / 360)))
 
-
+                    print("check10")
+                    print(im1)
                     im1 = cv2.resize(im1, (640, 360))
+                    print("check11")
+                    print(im1)
                     print('###################')
                     end = time.time()
-                    cv2.imshow('result', im1)
+                    print("check12")
+                    print(im1)
+                    cv2.imshow(str(p), im1)
+                    print("check13")
+                    print(im1)
                     cv2.imshow('roi',roi)
 
-                    if cv2.waitKey(1) == ord('q'):
+                    if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
 
     if save_txt or save_img:
