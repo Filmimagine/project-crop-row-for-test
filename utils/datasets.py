@@ -198,64 +198,64 @@ class LoadImages:  # for inference
         return self.nf  # number of files
 
 
-# class LoadWebcam:  # for inference
-#     def __init__(self, pipe='0', img_size=640, stride=32):
-#         self.mode = 'webcam' #add this line
-#         self.img_size = img_size
-#         self.stride = stride
+class LoadWebcam:  # for inference
+    def __init__(self, pipe='0', img_size=640, stride=32):
+        self.mode = 'webcam' #add this line
+        self.img_size = img_size
+        self.stride = stride
 
-#         if pipe.isnumeric():
-#             pipe = eval(pipe)  # local camera
-#         # pipe = 'rtsp://192.168.1.64/1'  # IP camera
-#         # pipe = 'rtsp://username:password@192.168.1.64/1'  # IP camera with login
-#         # pipe = 'http://wmccpinetop.axiscam.net/mjpg/video.mjpg'  # IP golf camera
+        if pipe.isnumeric():
+            pipe = eval(pipe)  # local camera
+        # pipe = 'rtsp://192.168.1.64/1'  # IP camera
+        # pipe = 'rtsp://username:password@192.168.1.64/1'  # IP camera with login
+        # pipe = 'http://wmccpinetop.axiscam.net/mjpg/video.mjpg'  # IP golf camera
 
-#         self.pipe = pipe
-#         self.cap = cv2.VideoCapture(pipe)  # video capture object
-#         self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 3)  # set buffer size
+        self.pipe = pipe
+        self.cap = cv2.VideoCapture(pipe)  # video capture object
+        self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 3)  # set buffer size
 
-#     def __iter__(self):
-#         self.count = -1
-#         return self
+    def __iter__(self):
+        self.count = -1
+        return self
 
-#     def __next__(self):
-#         self.count += 1
-#         if cv2.waitKey(1) == ord('q'):  # q to quit
-#             self.cap.release()
-#             cv2.destroyAllWindows()
-#             raise StopIteration
+    def __next__(self):
+        self.count += 1
+        if cv2.waitKey(1) == ord('q'):  # q to quit
+            self.cap.release()
+            cv2.destroyAllWindows()
+            raise StopIteration
 
-#         # Read frame
-#         if self.pipe == 0:  # local camera
-#             ret_val, img0 = self.cap.read()
-#             img0 = cv2.flip(img0, 1)  # flip left-right
-#         else:  # IP camera
-#             n = 0
-#             while True:
-#                 n += 1
-#                 self.cap.grab()
-#                 if n % 30 == 0:  # skip frames
-#                     ret_val, img0 = self.cap.retrieve()
-#                     if ret_val:
-#                         break
-#         # cv2.imshow("Webcam Feed", img0)
-#         # cv2.waitKey(1)            
-#         # Print
-#         assert ret_val, f'Camera Error {self.pipe}'
-#         img_path = 'webcam.jpg'
-#         print(f'webcam {self.count}: ', end='')
+        # Read frame
+        if self.pipe == 0:  # local camera
+            ret_val, img0 = self.cap.read()
+            img0 = cv2.flip(img0, 1)  # flip left-right
+        else:  # IP camera
+            n = 0
+            while True:
+                n += 1
+                self.cap.grab()
+                if n % 30 == 0:  # skip frames
+                    ret_val, img0 = self.cap.retrieve()
+                    if ret_val:
+                        break
+        # cv2.imshow("Webcam Feed", img0)
+        # cv2.waitKey(1)            
+        # Print
+        assert ret_val, f'Camera Error {self.pipe}'
+        img_path = 'webcam.jpg'
+        print(f'webcam {self.count}: ', end='')
 
-#         # Padded resize
-#         img = letterbox(img0, self.img_size, stride=self.stride)[0]
+        # Padded resize
+        img = letterbox(img0, self.img_size, stride=self.stride)[0]
 
-#         # Convert
-#         img = img[:, :, ::-1].transpose(2, 0, 1)  # BGR to RGB, to 3x416x416
-#         img = np.ascontiguousarray(img)
+        # Convert
+        img = img[:, :, ::-1].transpose(2, 0, 1)  # BGR to RGB, to 3x416x416
+        img = np.ascontiguousarray(img)
 
-#         return img_path, img, img0, None
+        return img_path, img, img0, None
 
-#     def __len__(self):
-#         return 0
+    def __len__(self):
+        return 0
 
 
 class LoadStreams:  # multiple IP or RTSP cameras

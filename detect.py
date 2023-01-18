@@ -264,7 +264,7 @@ def detect(save_img=False):
                     w0 = im0.shape[1]
 
                     im0 = cv2.resize(im0, (640, 360))
-                    im1 = cv2.resize(im0, (640, 360))
+                    im1 = cv2.resize(im1, (640, 360))
                     xyxy_list_sort = to_sublists(xyxy_list)
                     
                     # print(im0,im1)
@@ -297,7 +297,7 @@ def detect(save_img=False):
                     im1 = cv2.resize(im1, (640, 360))
                     print('###################')
                     end = time.time()
-                    cv2.imshow(str(p), im1)
+                    cv2.imshow('result', im1)
                     cv2.imshow('roi',roi)
 
                     if cv2.waitKey(1) == ord('q'):
@@ -313,7 +313,7 @@ def detect(save_img=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default='runs/train/exp1/weights/best.pt', help='model.pt path(s)')
-    parser.add_argument('--source', type=str, default='test_video/1.mp4', help='source')  # only the video format is allowed!!
+    parser.add_argument('--source', type=str, default='test_video/6.mp4', help='source')  # only the video format is allowed!!
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.45, help='IOU threshold for NMS')
