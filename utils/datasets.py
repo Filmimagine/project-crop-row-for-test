@@ -229,6 +229,7 @@ class LoadWebcam:  # for inference
         if self.pipe == 0:  # local camera
             ret_val, img0 = self.cap.read()
             img0 = cv2.flip(img0, 1)  # flip left-right
+            img0 = cv2.resize(img0,(640,360))
         else:  # IP camera
             n = 0
             while True:
