@@ -182,21 +182,16 @@ def detect(save_img=False):
                     if ceita_m > 10:
                         flag = False
                     if flag == True:
-                        print("check3")
 
                         cv2.line(im1, (int((y - b) / k), y), (int((360 - b) / k), 360), (0, 0, 255), 3)
-                        print("check4")
 
                         cv2.line(im1, (int((y - b1) / k1), y), (int((360 - b1) / k1), 360), (0, 0, 255), 3)
-                        print("check5")
 
                         cv2.line(im1, (int(((y - b) / k + (y - b1) / k1) / 2), y),
                                            (int(((360 - b) / k + (360 - b1) / k1) / 2), 360),
                                            (0, 255, 255), 3)
-                        print("check6")
 
                         cv2.polylines(im1, [c], True, (255, 0, 0), 3)
-                        print("check7")
 
                 except:
                     pass
@@ -208,7 +203,7 @@ def detect(save_img=False):
         
         for i, det in enumerate(pred):  # detections per image
             if webcam:  # batch_size >= 1
-                p, s, im0, frame = path[i], '%g: ' % i, im0s.copy(), dataset.count # บัคอยู่ตรงนี้แก้ให้แล้วครับ
+                p, s, im0, frame = path[i], '%g: ' % i, im0s.copy(), dataset.count # บัคอยู่ตรงนี้
                 print(im0s.shape,'process')
                 s += f'{i}: '            
             else:
@@ -233,9 +228,9 @@ def detect(save_img=False):
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
                 start = time.time()
                 xyxy_list = []
-                print("check1")
+
                 im1 = im0.copy()
-                print("check2")
+               
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
@@ -281,11 +276,8 @@ def detect(save_img=False):
                     w0 = im0.shape[1]
 
                     im0 = cv2.resize(im0, (640, 360))
-                    print("check8")
-
                     im1 = cv2.resize(im1, (640, 360))
-                    
-                    print("check9")
+
 
                     xyxy_list_sort = to_sublists(xyxy_list)
                     
@@ -314,21 +306,11 @@ def detect(save_img=False):
                     roi = rgb(roi)
 
                     fast(roi, int((new_lst[0][0] + xyxy_list_sort[0][0]) / (w0 / 320)), int(new_lst[0][1] / (h0 / 360)))
-
-                    print("check10")
-                    
-                    im1 = cv2.resize(im1, (640, 360))
-                    print("check11")
-                    
+                    im1 = cv2.resize(im1, (640, 360))                 
                     print('###################')
                     end = time.time()
-                    print("check12")
-                    
                     cv2.imshow(str(p), im1)
-                    print("check13")
-                    
-                    cv2.imshow('roi',roi)
-
+                    # cv2.imshow('roi',roi)
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
 
