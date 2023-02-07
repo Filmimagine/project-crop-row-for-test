@@ -199,7 +199,7 @@ class LoadImages:  # for inference
 
 
 class LoadWebcam:  # for inference
-    def __init__(self, pipe='0', img_size=640, stride=32):
+    def __init__(self, pipe='0', img_size=640, stride=32): #แก้ไขกล้อง
         self.mode = 'webcam' #add this line
         self.img_size = img_size
         self.stride = stride
@@ -226,7 +226,7 @@ class LoadWebcam:  # for inference
             raise StopIteration
 
         # Read frame
-        if self.pipe == 0:  # local camera
+        if self.pipe == 0:  # local camera  แก้ไขกล้อง
             ret_val, img0 = self.cap.read()
             img0 = cv2.flip(img0, 1)  # flip left-right
             img0 = cv2.resize(img0,(640,360))
