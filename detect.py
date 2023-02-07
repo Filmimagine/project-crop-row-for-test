@@ -182,14 +182,18 @@ def detect(save_img=False):
                     if ceita_m > 10:
                         flag = False
                     if flag == True:
-
-                        cv2.line(im1, (int((y - b) / k), y), (int((360 - b) / k), 360), (0, 0, 255), 3)
-
-                        cv2.line(im1, (int((y - b1) / k1), y), (int((360 - b1) / k1), 360), (0, 0, 255), 3)
-
-                        cv2.line(im1, (int(((y - b) / k + (y - b1) / k1) / 2), y),
-                                           (int(((360 - b) / k + (360 - b1) / k1) / 2), 360),
-                                           (0, 255, 255), 3)
+                        
+                        lft1=int((y - b) / k), y
+                        lft2=int((360 - b) / k), 360
+                        cv2.line(im1, (lft1), (lft2), (0, 0, 255), 3) #เส้นด้านซ้าย BGR
+                        
+                        rht1=int((y - b1) / k1), y
+                        rht2=int((360 - b1) / k1), 360
+                        cv2.line(im1, (rht1), (rht2), (0, 0, 255), 3) #เส้นด้านซ้าย BGR
+                        
+                        ct1=int(((y - b) / k + (y - b1) / k1) / 2), y
+                        ct2=int(((360 - b) / k + (360 - b1) / k1) / 2), 360
+                        cv2.line(im1, (ct1),(ct2),(0, 255, 255), 3)    #เส้นกลาง BGR
 
                         cv2.polylines(im1, [c], True, (255, 0, 0), 3)
 
