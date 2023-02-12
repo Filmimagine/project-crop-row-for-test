@@ -185,11 +185,12 @@ def detect(save_img=False):
                         
                         lft1=int((y - b) / k), y
                         lft2=int((360 - b) / k), 360
+                        # print(lft1,lft2)
                         cv2.line(im1, (lft1), (lft2), (0, 0, 255), 3) #เส้นด้านซ้าย BGR
                         
                         rht1=int((y - b1) / k1), y
                         rht2=int((360 - b1) / k1), 360
-                        cv2.line(im1, (rht1), (rht2), (0, 0, 255), 3) #เส้นด้านซ้าย BGR
+                        cv2.line(im1, (rht1), (rht2), (0, 0, 255), 3) #เส้นด้านขวา BGR
                         
                         ct1=int(((y - b) / k + (y - b1) / k1) / 2), y
                         ct2=int(((360 - b) / k + (360 - b1) / k1) / 2), 360
